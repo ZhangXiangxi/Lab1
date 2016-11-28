@@ -3,40 +3,40 @@ import java.util.regex.*;
 /**
  * Created by Xiangxi and Yuanze on 2016/9/18.
  */
-class CommandRecognizer {
-    public CommandRecognizer() {
+class CommandAnalyzer {
+    public CommandAnalyzer() {
 
     }
-    public String operand;                                                  // ¶ÔÃüÁî½øÐÐ²ð·Ö£¬µÃµ½ÃüÁîÀàÐÍinputTypeÓë²Ù×÷Êýoperand
-    public InputType inputType;
+    public String operand;                                                  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½Ö£ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½inputTypeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½operand
+    public int inputType;
     private String inputString;
     public void recognise(String inputString) {
         this.inputString = inputString;
         if (isEnd()) {
             operand = "";
-            inputType = InputType.End;
+            inputType = 0;
             return;
         }
         if (isSimplification()) {
             operand = inputString.substring(10, inputString.length());
-            inputType = InputType.Simplification;
+            inputType = 1;
             return;
         }
         if (isDerivation()) {
             operand = inputString.substring(5, inputString.length());
-            inputType = InputType.Derivation;
+            inputType = 2;
             return;
         }
         if (isExpression()) {
             operand = inputString;
-            inputType = InputType.Expression;
+            inputType = 3;
             return;
         }
         operand = "";
-        inputType = InputType.Unrecognised;
+        inputType = 4;
     }
 
-    private boolean matchPattern(String pattern) {                                      //¶ÔinputString½øÐÐÖ¸¶¨ÕýÔò±í´ïÊ½µÄÆ¥Åä¼ì²â
+    private boolean matchPattern(String pattern) {                                      //ï¿½ï¿½inputStringï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½ï¿½
         Pattern regex = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
         Matcher matcher = regex.matcher(inputString);
         return matcher.matches();

@@ -1,15 +1,19 @@
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
- * Created by Xiangxi and Yuanze on 2016/9/18.
+ * Created by Xiangxi and Yuanze on 2016/9/19.
  */
-public class Term {                                 // 不包含括号的联乘式
-    public String content;
-    public int sign;                              // '\0'表示负,'\1'表示正
-    Term(String content,char sign) {
-        this.content = content;
-        this.sign = sign;
+public class Term {
+    public Term(){
+        powers = new ArrayList<>();
     }
-    Term() {
-        this.content = "";
-        this.sign = '\0';
+    public Term(double coefficient, Collection<Integer> powers) {
+        this.coefficient = coefficient;
+        this.powers = new ArrayList<>();
+        this.powers.addAll(powers);
     }
+
+    public double coefficient;
+    public ArrayList<Integer> powers;
 }
